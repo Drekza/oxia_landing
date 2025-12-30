@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oxia - Delete Account</title>
+    <meta name="description" content="Request account deletion for Oxia app. Learn how to delete your account and what data will be removed.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://drekza.github.io/oxia_landing/account-deletion.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #32D74B;
+            --primary-green-light: #5EDB7B;
+            --primary-green-dark: #28A745;
+            --secondary-blue: #64D2FF;
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+            --gradient-green: linear-gradient(135deg, #32D74B 0%, #5EDB7B 50%, #64D2FF 100%);
+            --gradient-glow: radial-gradient(ellipse at center, rgba(50, 215, 75, 0.15) 0%, transparent 70%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 10, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .nav-scrolled {
+            padding: 1rem 4rem;
+            background: rgba(10, 10, 10, 0.95);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            position: relative;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            animation: breathe 4s ease-in-out infinite;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            background: var(--gradient-green);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 0.75rem 1.75rem;
+            background: var(--gradient-green);
+            border: none;
+            border-radius: 50px;
+            color: #000;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(50, 215, 75, 0.3);
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 0.5rem;
+            margin-left: 1.5rem;
+        }
+
+        .lang-btn {
+            padding: 0.4rem 0.75rem;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover,
+        .lang-btn.active {
+            color: var(--text-primary);
+            border-color: var(--primary-green);
+            background: rgba(50, 215, 75, 0.1);
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            background: var(--gradient-green);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .last-updated {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .policy-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .intro {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        strong {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        ul, ol {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            line-height: 1.7;
+        }
+
+        li::marker {
+            color: var(--primary-green);
+        }
+
+        a {
+            color: var(--primary-green);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary-green-light);
+        }
+
+        .warning-box {
+            background: rgba(255, 59, 48, 0.1);
+            border: 1px solid rgba(255, 59, 48, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .warning-box p {
+            color: #ff6b6b;
+            margin-bottom: 0;
+        }
+
+        .contact-box {
+            background: rgba(50, 215, 75, 0.05);
+            border: 1px solid rgba(50, 215, 75, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .contact-box h2 {
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+        }
+
+        .contact-box p {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        footer {
+            padding: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-links a.active {
+            color: var(--primary-green);
+        }
+
+        .footer-copy {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .content {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .policy-card {
+                padding: 2rem 1.5rem;
+                border-radius: 16px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <a href="index.html" class="logo">
+            <div class="logo-icon">
+                <img src="assets/logo.png" alt="Oxia Logo">
+            </div>
+            <span class="logo-text">Oxia</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html#features" data-en="Features" data-ru="Функции">Features</a></li>
+            <li><a href="index.html#modes" data-en="Methods" data-ru="Методы">Methods</a></li>
+            <li><a href="index.html#how-it-works" data-en="How it works" data-ru="Как это работает">How it works</a></li>
+            <li><a href="index.html#testimonials" data-en="Reviews" data-ru="Отзывы">Reviews</a></li>
+        </ul>
+        <div style="display: flex; align-items: center;">
+            <a href="index.html#download" class="nav-cta" data-en="Download" data-ru="Скачать">Download</a>
+            <div class="lang-switch">
+                <button class="lang-btn active" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" onclick="setLang('ru')">RU</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content">
+        <div class="page-header">
+            <h1 class="page-title" data-en="Delete Account" data-ru="Удаление аккаунта">Delete Account</h1>
+            <p class="last-updated" data-en="Last updated: December 30, 2025" data-ru="Последнее обновление: 30 декабря 2025">Last updated: December 30, 2025</p>
+        </div>
+
+        <div class="policy-card">
+            <p class="intro" data-en="You can request deletion of your Oxia account and all associated data at any time. This page explains how to submit a deletion request and what data will be removed." data-ru="Вы можете запросить удаление вашего аккаунта Oxia и всех связанных данных в любое время. На этой странице объясняется, как отправить запрос на удаление и какие данные будут удалены.">You can request deletion of your Oxia account and all associated data at any time. This page explains how to submit a deletion request and what data will be removed.</p>
+
+            <h2 data-en="How to Request Account Deletion" data-ru="Как запросить удаление аккаунта">How to Request Account Deletion</h2>
+            <p data-en="To delete your account, send an email request following these steps:" data-ru="Чтобы удалить аккаунт, отправьте запрос по электронной почте, следуя этим шагам:">To delete your account, send an email request following these steps:</p>
+            <ol>
+                <li data-en="Send an email to: drekza@yandex.ru" data-ru="Отправьте письмо на: drekza@yandex.ru">Send an email to: <a href="mailto:drekza@yandex.ru">drekza@yandex.ru</a></li>
+                <li data-en="Use the subject line: \"Account Deletion Request\"" data-ru="Укажите тему письма: «Запрос на удаление аккаунта»">Use the subject line: <strong>"Account Deletion Request"</strong></li>
+                <li data-en="Send the request from the same email address you used for Google Sign-In" data-ru="Отправьте запрос с того же email-адреса, который вы использовали для входа через Google">Send the request from the <strong>same email address</strong> you used for Google Sign-In</li>
+            </ol>
+
+            <div class="warning-box">
+                <p data-en="Important: For security purposes, we can only process deletion requests sent from the email address registered to your account. Requests from other email addresses will not be processed." data-ru="Важно: В целях безопасности мы обрабатываем только запросы на удаление, отправленные с email-адреса, зарегистрированного в вашем аккаунте. Запросы с других адресов не будут обработаны.">Important: For security purposes, we can only process deletion requests sent from the email address registered to your account. Requests from other email addresses will not be processed.</p>
+            </div>
+
+            <h2 data-en="Data That Will Be Deleted" data-ru="Данные, которые будут удалены">Data That Will Be Deleted</h2>
+            <p data-en="When your account is deleted, the following data will be permanently removed from our servers:" data-ru="При удалении аккаунта следующие данные будут безвозвратно удалены с наших серверов:">When your account is deleted, the following data will be permanently removed from our servers:</p>
+            <ul>
+                <li data-en="Your account information (email, display name)" data-ru="Информация об аккаунте (email, отображаемое имя)">Your account information (email, display name)</li>
+                <li data-en="Smoking statistics and progress data" data-ru="Статистика курения и данные о прогрессе">Smoking statistics and progress data</li>
+                <li data-en="Your personal reasons for quitting" data-ru="Ваши личные причины для отказа от курения">Your personal reasons for quitting</li>
+                <li data-en="All other data associated with your account" data-ru="Все остальные данные, связанные с вашим аккаунтом">All other data associated with your account</li>
+            </ul>
+
+            <h2 data-en="Data Stored Locally" data-ru="Данные, хранящиеся локально">Data Stored Locally</h2>
+            <p data-en="Some data is stored only on your device and is not affected by account deletion:" data-ru="Некоторые данные хранятся только на вашем устройстве и не затрагиваются при удалении аккаунта:">Some data is stored only on your device and is not affected by account deletion:</p>
+            <ul>
+                <li data-en="Emergency contacts" data-ru="Экстренные контакты">Emergency contacts</li>
+                <li data-en="App theme preferences" data-ru="Настройки темы приложения">App theme preferences</li>
+            </ul>
+            <p data-en="To remove this data, uninstall the app from your device." data-ru="Чтобы удалить эти данные, удалите приложение с вашего устройства.">To remove this data, uninstall the app from your device.</p>
+
+            <h2 data-en="Processing Time" data-ru="Время обработки">Processing Time</h2>
+            <p data-en="Your account and all associated data will be permanently deleted within 30 days of receiving your request. You will receive a confirmation email once the deletion is complete." data-ru="Ваш аккаунт и все связанные данные будут безвозвратно удалены в течение 30 дней после получения вашего запроса. Вы получите подтверждение по email после завершения удаления.">Your account and all associated data will be permanently deleted within 30 days of receiving your request. You will receive a confirmation email once the deletion is complete.</p>
+
+            <div class="contact-box">
+                <h2 data-en="Questions?" data-ru="Вопросы?">Questions?</h2>
+                <p data-en="If you have any questions about account deletion, please contact us at:" data-ru="Если у вас есть вопросы об удалении аккаунта, свяжитесь с нами:">If you have any questions about account deletion, please contact us at:</p>
+                <p><strong>Email:</strong> <a href="mailto:drekza@yandex.ru">drekza@yandex.ru</a></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <img src="assets/logo.png" alt="Oxia Logo">
+                </div>
+                <span class="logo-text">Oxia</span>
+            </a>
+            <div class="footer-links">
+                <a href="privacy-policy.html" data-en="Privacy Policy" data-ru="Политика конфиденциальности">Privacy Policy</a>
+                <a href="terms-of-service.html" data-en="Terms of Service" data-ru="Условия использования">Terms of Service</a>
+                <a href="account-deletion.html" class="active" data-en="Delete Account" data-ru="Удаление аккаунта">Delete Account</a>
+                <a href="mailto:drekza@yandex.ru" data-en="Support" data-ru="Поддержка">Support</a>
+            </div>
+            <p class="footer-copy">© 2026 Oxia. <span data-en="All rights reserved." data-ru="Все права защищены.">All rights reserved.</span></p>
+        </div>
+    </footer>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        });
+
+        let currentLang = 'en';
+
+        function setLang(lang) {
+            currentLang = lang;
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent === lang.toUpperCase()) {
+                    btn.classList.add('active');
+                }
+            });
+
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (text) {
+                    el.textContent = text;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
