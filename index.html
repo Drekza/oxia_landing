@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oxia - Your Path to Freedom from Smoking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #32D74B;
+            --primary-green-light: #5EDB7B;
+            --primary-green-dark: #28A745;
+            --secondary-blue: #64D2FF;
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+            --gradient-green: linear-gradient(135deg, #32D74B 0%, #5EDB7B 50%, #64D2FF 100%);
+            --gradient-glow: radial-gradient(ellipse at center, rgba(50, 215, 75, 0.15) 0%, transparent 70%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 10, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .nav-scrolled {
+            padding: 1rem 4rem;
+            background: rgba(10, 10, 10, 0.95);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            position: relative;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            animation: breathe 4s ease-in-out infinite;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            background: var(--gradient-green);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 0.75rem 1.75rem;
+            background: var(--gradient-green);
+            border: none;
+            border-radius: 50px;
+            color: #000;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(50, 215, 75, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 8rem 4rem 4rem;
+            overflow: hidden;
+        }
+
+        .hero-glow {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            background: var(--gradient-glow);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse-glow 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .hero-glow-2 {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(ellipse at center, rgba(100, 210, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            top: 30%;
+            right: 10%;
+            animation: pulse-glow 8s ease-in-out infinite reverse;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(50, 215, 75, 0.1);
+            border: 1px solid rgba(50, 215, 75, 0.3);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--primary-green);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--primary-green);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 500;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease-out 0.1s backwards;
+        }
+
+        .hero h1 .gradient-text {
+            background: var(--gradient-green);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.35rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+            font-weight: 300;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.3s backwards;
+        }
+
+        .btn-primary {
+            padding: 1rem 2.5rem;
+            background: var(--gradient-green);
+            border: none;
+            border-radius: 50px;
+            color: #000;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 60px rgba(50, 215, 75, 0.4);
+        }
+
+        .btn-secondary {
+            padding: 1rem 2.5rem;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-free {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 4rem;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+            flex-wrap: wrap;
+        }
+
+        .free-badge {
+            padding: 0.5rem 1.25rem;
+            background: var(--gradient-green);
+            border-radius: 50px;
+            color: #000;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .free-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Floating elements */
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .float-item {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .float-item:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .float-item:nth-child(2) { top: 60%; left: 5%; animation-delay: 3s; }
+        .float-item:nth-child(3) { top: 30%; right: 10%; animation-delay: 6s; }
+        .float-item:nth-child(4) { top: 70%; right: 15%; animation-delay: 9s; }
+
+        /* Features Section */
+        .features {
+            padding: 8rem 4rem;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 5rem;
+        }
+
+        .section-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-green);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(50, 215, 75, 0.3);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            background: rgba(50, 215, 75, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-desc {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Modes Section */
+        .modes {
+            padding: 8rem 4rem;
+            background: var(--bg-secondary);
+            position: relative;
+        }
+
+        .modes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .mode-card {
+            background: var(--bg-primary);
+            border-radius: 32px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .mode-card:hover {
+            transform: scale(1.02);
+            border-color: rgba(50, 215, 75, 0.3);
+        }
+
+        .mode-card.gradual {
+            background: linear-gradient(135deg, rgba(50, 215, 75, 0.05) 0%, var(--bg-primary) 100%);
+        }
+
+        .mode-card.cold-turkey {
+            background: linear-gradient(135deg, rgba(100, 210, 255, 0.05) 0%, var(--bg-primary) 100%);
+        }
+
+        .mode-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mode-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .mode-desc {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .mode-benefits {
+            list-style: none;
+        }
+
+        .mode-benefits li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .mode-benefits li::before {
+            content: '✓';
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        /* How it Works */
+        .how-it-works {
+            padding: 8rem 4rem;
+            position: relative;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 60px;
+            left: 20%;
+            right: 20%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(50, 215, 75, 0.3), rgba(50, 215, 75, 0.3), transparent);
+        }
+
+        .step {
+            text-align: center;
+            flex: 1;
+            max-width: 280px;
+            position: relative;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 2px solid rgba(50, 215, 75, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary-green);
+            margin: 0 auto 1.5rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .step-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 8rem 4rem;
+            background: var(--bg-secondary);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: var(--bg-primary);
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .testimonial-stars {
+            color: #FFD60A;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-text {
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--gradient-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .testimonial-name {
+            font-weight: 500;
+        }
+
+        .testimonial-info {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 10rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-glow {
+            position: absolute;
+            width: 1000px;
+            height: 600px;
+            background: var(--gradient-glow);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 10;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+        }
+
+        .store-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .store-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .store-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(50, 215, 75, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .store-btn svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .store-text {
+            text-align: left;
+        }
+
+        .store-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .store-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-copy {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Animations */
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(20px) rotate(-5deg); }
+        }
+
+        /* Scroll animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .modes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                flex-direction: column;
+                gap: 3rem;
+            }
+
+            .steps::before {
+                display: none;
+            }
+
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .features,
+            .modes,
+            .how-it-works,
+            .testimonials,
+            .cta-section {
+                padding: 4rem 1.5rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        /* Language switcher */
+        .lang-switch {
+            display: flex;
+            gap: 0.5rem;
+            margin-left: 1.5rem;
+        }
+
+        .lang-btn {
+            padding: 0.4rem 0.75rem;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover,
+        .lang-btn.active {
+            color: var(--text-primary);
+            border-color: var(--primary-green);
+            background: rgba(50, 215, 75, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="logo">
+            <div class="logo-icon">
+                <img src="assets/logo.png" alt="Oxia Logo">
+            </div>
+            <span class="logo-text">Oxia</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#features" data-en="Features" data-ru="Функции">Features</a></li>
+            <li><a href="#modes" data-en="Methods" data-ru="Методы">Methods</a></li>
+            <li><a href="#how-it-works" data-en="How it works" data-ru="Как это работает">How it works</a></li>
+            <li><a href="#testimonials" data-en="Reviews" data-ru="Отзывы">Reviews</a></li>
+        </ul>
+        <div style="display: flex; align-items: center;">
+            <a href="#download" class="nav-cta" data-en="Download" data-ru="Скачать">Download</a>
+            <div class="lang-switch">
+                <button class="lang-btn active" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" onclick="setLang('ru')">RU</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-glow"></div>
+        <div class="hero-glow-2"></div>
+        <div class="floating-elements">
+            <svg class="float-item" width="60" height="60" viewBox="0 0 60 60" fill="none">
+                <circle cx="30" cy="30" r="30" fill="url(#grad1)"/>
+                <defs><linearGradient id="grad1"><stop offset="0%" stop-color="#32D74B"/><stop offset="100%" stop-color="#64D2FF"/></linearGradient></defs>
+            </svg>
+            <svg class="float-item" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <rect width="40" height="40" rx="12" fill="#32D74B" fill-opacity="0.3"/>
+            </svg>
+            <svg class="float-item" width="50" height="50" viewBox="0 0 50 50" fill="none">
+                <polygon points="25,5 45,40 5,40" fill="#64D2FF" fill-opacity="0.2"/>
+            </svg>
+            <svg class="float-item" width="35" height="35" viewBox="0 0 35 35" fill="none">
+                <circle cx="17.5" cy="17.5" r="17.5" fill="#5EDB7B" fill-opacity="0.2"/>
+            </svg>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span data-en="Now available on Android" data-ru="Доступно на Android">Now available on Android</span>
+            </div>
+            <h1>
+                <span data-en="Your path to" data-ru="Ваш путь к">Your path to</span><br>
+                <span class="gradient-text" data-en="freedom from smoking" data-ru="свободе от курения">freedom from smoking</span>
+            </h1>
+            <p class="hero-subtitle" data-en="We're here to support you, not judge. Every step is a victory, every day is your achievement. Choose your path and move at your own pace." data-ru="Мы здесь, чтобы поддержать вас, а не осуждать. Каждый шаг — это победа, каждый день — ваше достижение. Выберите свой путь и двигайтесь в своём темпе.">
+                We're here to support you, not judge. Every step is a victory, every day is your achievement. Choose your path and move at your own pace.
+            </p>
+            <div class="hero-cta-group">
+                <a href="#download" class="btn-primary">
+                    <span data-en="Start Your Journey" data-ru="Начать путь">Start Your Journey</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="#how-it-works" class="btn-secondary">
+                    <span data-en="Learn More" data-ru="Узнать больше">Learn More</span>
+                </a>
+            </div>
+            <div class="hero-free">
+                <span class="free-badge" data-en="100% Free" data-ru="100% Бесплатно">100% Free</span>
+                <span class="free-text" data-en="No subscriptions, no hidden fees, no ads. Forever." data-ru="Без подписок, скрытых платежей и рекламы. Навсегда.">No subscriptions, no hidden fees, no ads. Forever.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header reveal">
+            <div class="section-label" data-en="Features" data-ru="Возможности">Features</div>
+            <h2 class="section-title" data-en="Everything you need to quit" data-ru="Всё необходимое для отказа">Everything you need to quit</h2>
+            <p class="section-subtitle" data-en="Powerful tools designed to support your journey every step of the way" data-ru="Мощные инструменты, разработанные для поддержки вашего пути на каждом этапе">Powerful tools designed to support your journey every step of the way</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <div class="feature-icon">📊</div>
+                <h3 class="feature-title" data-en="Progress Tracking" data-ru="Отслеживание прогресса">Progress Tracking</h3>
+                <p class="feature-desc" data-en="Track your daily progress, see statistics, and celebrate milestones as you reduce or quit smoking." data-ru="Отслеживайте ежедневный прогресс, смотрите статистику и отмечайте достижения по мере сокращения или отказа от курения.">Track your daily progress, see statistics, and celebrate milestones as you reduce or quit smoking.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">💰</div>
+                <h3 class="feature-title" data-en="Savings Calculator" data-ru="Калькулятор экономии">Savings Calculator</h3>
+                <p class="feature-desc" data-en="See exactly how much money you're saving. Set savings goals and watch your progress towards them." data-ru="Смотрите, сколько денег вы экономите. Устанавливайте цели накопления и следите за прогрессом.">See exactly how much money you're saving. Set savings goals and watch your progress towards them.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">❤️</div>
+                <h3 class="feature-title" data-en="Health Recovery" data-ru="Восстановление здоровья">Health Recovery</h3>
+                <p class="feature-desc" data-en="Track your body's recovery timeline. From improved circulation to lung regeneration, see your health improve." data-ru="Следите за восстановлением организма. От улучшения кровообращения до регенерации лёгких — наблюдайте за улучшением здоровья.">Track your body's recovery timeline. From improved circulation to lung regeneration, see your health improve.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">🧘</div>
+                <h3 class="feature-title" data-en="Craving Help" data-ru="Помощь при тяге">Craving Help</h3>
+                <p class="feature-desc" data-en="Breathing exercises, delay timers, and distraction tools to help you overcome cravings in the moment." data-ru="Дыхательные упражнения, таймеры отсрочки и инструменты отвлечения, чтобы помочь преодолеть тягу в моменте.">Breathing exercises, delay timers, and distraction tools to help you overcome cravings in the moment.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">🎯</div>
+                <h3 class="feature-title" data-en="Personalized Goals" data-ru="Персональные цели">Personalized Goals</h3>
+                <p class="feature-desc" data-en="Set your own pace with customizable daily goals. The app adapts to your journey, not the other way around." data-ru="Устанавливайте собственный темп с настраиваемыми дневными целями. Приложение адаптируется под ваш путь.">Set your own pace with customizable daily goals. The app adapts to your journey, not the other way around.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">📱</div>
+                <h3 class="feature-title" data-en="Beautiful Design" data-ru="Красивый дизайн">Beautiful Design</h3>
+                <p class="feature-desc" data-en="A calming, intuitive interface that makes tracking effortless. Dark and light themes to match your preference." data-ru="Успокаивающий, интуитивный интерфейс для лёгкого отслеживания. Тёмная и светлая темы на ваш выбор.">A calming, intuitive interface that makes tracking effortless. Dark and light themes to match your preference.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modes Section -->
+    <section class="modes" id="modes">
+        <div class="section-header reveal">
+            <div class="section-label" data-en="Choose your path" data-ru="Выберите свой путь">Choose your path</div>
+            <h2 class="section-title" data-en="Two proven methods" data-ru="Два проверенных метода">Two proven methods</h2>
+            <p class="section-subtitle" data-en="Both methods work. Choose what feels right for you." data-ru="Оба метода работают. Выберите то, что подходит именно вам.">Both methods work. Choose what feels right for you.</p>
+        </div>
+        <div class="modes-grid">
+            <div class="mode-card gradual reveal">
+                <div class="mode-icon">🌿</div>
+                <h3 class="mode-title" data-en="Gradual Reduction" data-ru="Постепенное сокращение">Gradual Reduction</h3>
+                <p class="mode-desc" data-en="Reduce the number of cigarettes step by step. Move at your own pace without stress." data-ru="Сокращайте количество сигарет шаг за шагом. Двигайтесь в своём темпе без стресса.">Reduce the number of cigarettes step by step. Move at your own pace without stress.</p>
+                <ul class="mode-benefits">
+                    <li data-en="Comfortable pace reduction" data-ru="Сокращение в комфортном темпе">Comfortable pace reduction</li>
+                    <li data-en="Track every step" data-ru="Отслеживание каждого шага">Track every step</li>
+                    <li data-en="Full control over the process" data-ru="Полный контроль над процессом">Full control over the process</li>
+                </ul>
+            </div>
+            <div class="mode-card cold-turkey reveal">
+                <div class="mode-icon">⚡</div>
+                <h3 class="mode-title" data-en="Cold Turkey" data-ru="Полный отказ">Cold Turkey</h3>
+                <p class="mode-desc" data-en="Quit smoking today. Feel the health benefits immediately." data-ru="Бросьте курить сегодня. Почувствуйте пользу для здоровья немедленно.">Quit smoking today. Feel the health benefits immediately.</p>
+                <ul class="mode-benefits">
+                    <li data-en="Fast body recovery" data-ru="Быстрое восстановление организма">Fast body recovery</li>
+                    <li data-en="Smoke-free time counter" data-ru="Счётчик времени без сигарет">Smoke-free time counter</li>
+                    <li data-en="Achievement tracking" data-ru="Отслеживание достижений">Achievement tracking</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="section-header reveal">
+            <div class="section-label" data-en="Simple process" data-ru="Простой процесс">Simple process</div>
+            <h2 class="section-title" data-en="How it works" data-ru="Как это работает">How it works</h2>
+        </div>
+        <div class="steps">
+            <div class="step reveal">
+                <div class="step-number">1</div>
+                <h3 class="step-title" data-en="Choose your method" data-ru="Выберите метод">Choose your method</h3>
+                <p class="step-desc" data-en="Pick gradual reduction or cold turkey based on what works best for you." data-ru="Выберите постепенное сокращение или полный отказ — то, что подходит именно вам.">Pick gradual reduction or cold turkey based on what works best for you.</p>
+            </div>
+            <div class="step reveal">
+                <div class="step-number">2</div>
+                <h3 class="step-title" data-en="Set your goals" data-ru="Установите цели">Set your goals</h3>
+                <p class="step-desc" data-en="Configure your daily limits, savings targets, and personal motivations." data-ru="Настройте дневные лимиты, цели накопления и личные мотивации.">Configure your daily limits, savings targets, and personal motivations.</p>
+            </div>
+            <div class="step reveal">
+                <div class="step-number">3</div>
+                <h3 class="step-title" data-en="Track & celebrate" data-ru="Отслеживайте и празднуйте">Track & celebrate</h3>
+                <p class="step-desc" data-en="Log your progress, overcome cravings with our tools, and celebrate every milestone." data-ru="Фиксируйте прогресс, преодолевайте тягу с нашими инструментами и отмечайте каждое достижение.">Log your progress, overcome cravings with our tools, and celebrate every milestone.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-header reveal">
+            <div class="section-label" data-en="Testimonials" data-ru="Отзывы">Testimonials</div>
+            <h2 class="section-title" data-en="Stories of freedom" data-ru="Истории свободы">Stories of freedom</h2>
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial-card reveal">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text" data-en="\"The gradual reduction mode was perfect for me. I went from 20 cigarettes a day to zero in just 3 months. The breathing exercises helped so much with cravings.\"" data-ru="«Режим постепенного сокращения был идеален для меня. Я снизил потребление с 20 сигарет в день до нуля всего за 3 месяца. Дыхательные упражнения очень помогли справиться с тягой.»">"The gradual reduction mode was perfect for me. I went from 20 cigarettes a day to zero in just 3 months. The breathing exercises helped so much with cravings."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">M</div>
+                    <div>
+                        <div class="testimonial-name">Michael K.</div>
+                        <div class="testimonial-info" data-en="Smoke-free for 6 months" data-ru="Не курит 6 месяцев">Smoke-free for 6 months</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text" data-en="\"I've tried many apps, but Oxia is different. The health recovery timeline kept me motivated, and seeing my savings grow was incredibly satisfying.\"" data-ru="«Я пробовала много приложений, но Oxia — это что-то другое. Шкала восстановления здоровья поддерживала мотивацию, а наблюдать за ростом экономии было невероятно приятно.»">"I've tried many apps, but Oxia is different. The health recovery timeline kept me motivated, and seeing my savings grow was incredibly satisfying."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">S</div>
+                    <div>
+                        <div class="testimonial-name">Sarah L.</div>
+                        <div class="testimonial-info" data-en="Smoke-free for 1 year" data-ru="Не курит 1 год">Smoke-free for 1 year</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text" data-en="\"The non-judgmental approach is what I needed. Even when I had slip-ups, the app encouraged me to keep going. Now I'm completely smoke-free!\"" data-ru="«Безоценочный подход — именно то, что мне было нужно. Даже когда я срывался, приложение поддерживало меня продолжать. Теперь я полностью свободен от курения!»">"The non-judgmental approach is what I needed. Even when I had slip-ups, the app encouraged me to keep going. Now I'm completely smoke-free!"</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">A</div>
+                    <div>
+                        <div class="testimonial-name">Alex R.</div>
+                        <div class="testimonial-info" data-en="Smoke-free for 4 months" data-ru="Не курит 4 месяца">Smoke-free for 4 months</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="download">
+        <div class="cta-glow"></div>
+        <div class="cta-content reveal">
+            <h2 class="cta-title" data-en="Ready to breathe free?" data-ru="Готовы дышать свободно?">Ready to breathe free?</h2>
+            <p class="cta-subtitle" data-en="Download Oxia today and start your journey to a smoke-free life." data-ru="Скачайте Oxia сегодня и начните путь к жизни без сигарет.">Download Oxia today and start your journey to a smoke-free life.</p>
+            <div class="store-buttons">
+                <a href="#" class="store-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                    </svg>
+                    <div class="store-text">
+                        <div class="store-label" data-en="Get it on" data-ru="Доступно в">Get it on</div>
+                        <div class="store-name">Google Play</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <img src="assets/logo.png" alt="Oxia Logo">
+                </div>
+                <span class="logo-text">Oxia</span>
+            </a>
+            <div class="footer-links">
+                <a href="privacy-policy.html" data-en="Privacy Policy" data-ru="Политика конфиденциальности">Privacy Policy</a>
+                <a href="terms-of-service.html" data-en="Terms of Service" data-ru="Условия использования">Terms of Service</a>
+                <a href="#" data-en="Support" data-ru="Поддержка">Support</a>
+                <a href="#" data-en="Contact" data-ru="Контакты">Contact</a>
+            </div>
+            <p class="footer-copy">© 2026 Oxia. <span data-en="All rights reserved." data-ru="Все права защищены.">All rights reserved.</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal animation
+        const reveals = document.querySelectorAll('.reveal');
+
+        function revealOnScroll() {
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const revealPoint = 150;
+
+                if (elementTop < windowHeight - revealPoint) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Initial check
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        });
+
+        // Language switching
+        let currentLang = 'en';
+
+        function setLang(lang) {
+            currentLang = lang;
+
+            // Update buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent === lang.toUpperCase()) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Update all translatable elements
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (text) {
+                    el.textContent = text;
+                }
+            });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect for floating elements
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+
+            document.querySelectorAll('.float-item').forEach((item, index) => {
+                const factor = (index + 1) * 0.5;
+                item.style.transform = `translate(${moveX * factor}px, ${moveY * factor}px)`;
+            });
+        });
+    </script>
+</body>
+</html>

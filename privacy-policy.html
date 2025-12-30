@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oxia - Privacy Policy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #32D74B;
+            --primary-green-light: #5EDB7B;
+            --primary-green-dark: #28A745;
+            --secondary-blue: #64D2FF;
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+            --gradient-green: linear-gradient(135deg, #32D74B 0%, #5EDB7B 50%, #64D2FF 100%);
+            --gradient-glow: radial-gradient(ellipse at center, rgba(50, 215, 75, 0.15) 0%, transparent 70%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        /* Noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 10, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .nav-scrolled {
+            padding: 1rem 4rem;
+            background: rgba(10, 10, 10, 0.95);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            position: relative;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            animation: breathe 4s ease-in-out infinite;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            background: var(--gradient-green);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 0.75rem 1.75rem;
+            background: var(--gradient-green);
+            border: none;
+            border-radius: 50px;
+            color: #000;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(50, 215, 75, 0.3);
+        }
+
+        /* Language switcher */
+        .lang-switch {
+            display: flex;
+            gap: 0.5rem;
+            margin-left: 1.5rem;
+        }
+
+        .lang-btn {
+            padding: 0.4rem 0.75rem;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover,
+        .lang-btn.active {
+            color: var(--text-primary);
+            border-color: var(--primary-green);
+            background: rgba(50, 215, 75, 0.1);
+        }
+
+        /* Main Content */
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            background: var(--gradient-green);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .last-updated {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .policy-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .intro {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        strong {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        ul {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            line-height: 1.7;
+        }
+
+        li::marker {
+            color: var(--primary-green);
+        }
+
+        a {
+            color: var(--primary-green);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary-green-light);
+        }
+
+        .contact-box {
+            background: rgba(50, 215, 75, 0.05);
+            border: 1px solid rgba(50, 215, 75, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .contact-box h2 {
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+        }
+
+        .contact-box p {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-links a.active {
+            color: var(--primary-green);
+        }
+
+        .footer-copy {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Animations */
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .content {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .policy-card {
+                padding: 2rem 1.5rem;
+                border-radius: 16px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="index.html" class="logo">
+            <div class="logo-icon">
+                <img src="assets/logo.png" alt="Oxia Logo">
+            </div>
+            <span class="logo-text">Oxia</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html#features" data-en="Features" data-ru="Функции">Features</a></li>
+            <li><a href="index.html#modes" data-en="Methods" data-ru="Методы">Methods</a></li>
+            <li><a href="index.html#how-it-works" data-en="How it works" data-ru="Как это работает">How it works</a></li>
+            <li><a href="index.html#testimonials" data-en="Reviews" data-ru="Отзывы">Reviews</a></li>
+        </ul>
+        <div style="display: flex; align-items: center;">
+            <a href="index.html#download" class="nav-cta" data-en="Download" data-ru="Скачать">Download</a>
+            <div class="lang-switch">
+                <button class="lang-btn active" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" onclick="setLang('ru')">RU</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <main class="content">
+        <div class="page-header">
+            <h1 class="page-title" data-en="Privacy Policy" data-ru="Политика конфиденциальности">Privacy Policy</h1>
+            <p class="last-updated" data-en="Last updated: December 27, 2025" data-ru="Последнее обновление: 27 декабря 2025">Last updated: December 27, 2025</p>
+        </div>
+
+        <div class="policy-card">
+            <p class="intro" data-en="Oxia (\"we\", \"our\", or \"the app\") is a mobile application designed to help users quit smoking. This Privacy Policy explains how we collect, use, and protect your information." data-ru="Oxia («мы», «наш» или «приложение») — это мобильное приложение, разработанное для помощи пользователям в отказе от курения. Настоящая Политика конфиденциальности объясняет, как мы собираем, используем и защищаем вашу информацию.">Oxia ("we", "our", or "the app") is a mobile application designed to help users quit smoking. This Privacy Policy explains how we collect, use, and protect your information.</p>
+
+            <h2 data-en="Information We Collect" data-ru="Информация, которую мы собираем">Information We Collect</h2>
+
+            <p><strong data-en="Account Information" data-ru="Данные аккаунта">Account Information</strong></p>
+            <p data-en="When you sign in with Google, we collect:" data-ru="При входе через Google мы собираем:">When you sign in with Google, we collect:</p>
+            <ul>
+                <li data-en="Email address" data-ru="Адрес электронной почты">Email address</li>
+                <li data-en="Display name (from your Google account)" data-ru="Отображаемое имя (из вашего аккаунта Google)">Display name (from your Google account)</li>
+            </ul>
+
+            <p><strong data-en="Smoking Data" data-ru="Данные о курении">Smoking Data</strong></p>
+            <p data-en="To provide our core functionality, we collect information you provide about your smoking habits:" data-ru="Для обеспечения основной функциональности мы собираем информацию о ваших привычках курения:">To provide our core functionality, we collect information you provide about your smoking habits:</p>
+            <ul>
+                <li data-en="Smoking statistics and progress tracking" data-ru="Статистика курения и отслеживание прогресса">Smoking statistics and progress tracking</li>
+                <li data-en="Your personal reasons for quitting" data-ru="Ваши личные причины для отказа от курения">Your personal reasons for quitting</li>
+            </ul>
+
+            <p><strong data-en="Local Data" data-ru="Локальные данные">Local Data</strong></p>
+            <p data-en="Some data is stored only on your device and is not transmitted to our servers:" data-ru="Некоторые данные хранятся только на вашем устройстве и не передаются на наши серверы:">Some data is stored only on your device and is not transmitted to our servers:</p>
+            <ul>
+                <li data-en="Emergency contacts (up to 3 contacts for the \"call a loved one\" feature)" data-ru="Экстренные контакты (до 3 контактов для функции «позвонить близкому»)">Emergency contacts (up to 3 contacts for the "call a loved one" feature)</li>
+                <li data-en="App theme preferences" data-ru="Настройки темы приложения">App theme preferences</li>
+            </ul>
+
+            <p><strong data-en="Analytics Data" data-ru="Аналитические данные">Analytics Data</strong></p>
+            <p data-en="We use Firebase Analytics, Crashlytics, and Performance Monitoring to improve the app. These services collect:" data-ru="Мы используем Firebase Analytics, Crashlytics и Performance Monitoring для улучшения приложения. Эти сервисы собирают:">We use Firebase Analytics, Crashlytics, and Performance Monitoring to improve the app. These services collect:</p>
+            <ul>
+                <li data-en="Anonymous usage events (such as screen views and feature usage)" data-ru="Анонимные события использования (например, просмотры экранов и использование функций)">Anonymous usage events (such as screen views and feature usage)</li>
+                <li data-en="Crash reports and performance metrics" data-ru="Отчёты о сбоях и метрики производительности">Crash reports and performance metrics</li>
+                <li data-en="Device information (model, OS version)" data-ru="Информация об устройстве (модель, версия ОС)">Device information (model, OS version)</li>
+            </ul>
+            <p data-en="This analytics data does not include personally identifiable information and cannot be linked to your account." data-ru="Эти аналитические данные не содержат персональную информацию и не могут быть связаны с вашим аккаунтом.">This analytics data does not include personally identifiable information and cannot be linked to your account.</p>
+
+            <h2 data-en="How We Use Your Information" data-ru="Как мы используем вашу информацию">How We Use Your Information</h2>
+            <p data-en="We use the collected information solely to:" data-ru="Мы используем собранную информацию исключительно для:">We use the collected information solely to:</p>
+            <ul>
+                <li data-en="Provide and maintain the app's functionality" data-ru="Обеспечения и поддержания функциональности приложения">Provide and maintain the app's functionality</li>
+                <li data-en="Track your progress toward quitting smoking" data-ru="Отслеживания вашего прогресса в отказе от курения">Track your progress toward quitting smoking</li>
+                <li data-en="Improve app stability and performance" data-ru="Улучшения стабильности и производительности приложения">Improve app stability and performance</li>
+            </ul>
+            <p data-en="We do not sell your data. We do not use your data for advertising. We do not send marketing emails." data-ru="Мы не продаём ваши данные. Мы не используем ваши данные для рекламы. Мы не отправляем маркетинговые письма.">We do not sell your data. We do not use your data for advertising. We do not send marketing emails.</p>
+
+            <h2 data-en="Data Storage and Security" data-ru="Хранение и безопасность данных">Data Storage and Security</h2>
+            <p data-en="Your account and smoking data is stored on Supabase servers located in the European Union (Ireland). We implement appropriate security measures to protect your information, including encrypted data transmission and secure authentication." data-ru="Ваши данные аккаунта и курения хранятся на серверах Supabase, расположенных в Европейском Союзе (Ирландия). Мы применяем соответствующие меры безопасности для защиты вашей информации, включая шифрованную передачу данных и безопасную аутентификацию.">Your account and smoking data is stored on Supabase servers located in the European Union (Ireland). We implement appropriate security measures to protect your information, including encrypted data transmission and secure authentication.</p>
+
+            <h2 data-en="Third-Party Services" data-ru="Сторонние сервисы">Third-Party Services</h2>
+            <p data-en="We use the following third-party services:" data-ru="Мы используем следующие сторонние сервисы:">We use the following third-party services:</p>
+            <ul>
+                <li><strong>Google Sign-In</strong> — <span data-en="for authentication" data-ru="для аутентификации">for authentication</span> (<a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a>)</li>
+                <li><strong>Supabase</strong> — <span data-en="for data storage" data-ru="для хранения данных">for data storage</span> (<a href="https://supabase.com/privacy" target="_blank">Supabase Privacy Policy</a>)</li>
+                <li><strong>Firebase Analytics, Crashlytics, Performance Monitoring</strong> — <span data-en="for anonymous analytics and crash reporting" data-ru="для анонимной аналитики и отчётов о сбоях">for anonymous analytics and crash reporting</span> (<a href="https://firebase.google.com/support/privacy" target="_blank">Firebase Privacy Policy</a>)</li>
+            </ul>
+
+            <h2 data-en="Data Retention" data-ru="Хранение данных">Data Retention</h2>
+            <p data-en="We retain your data for as long as your account is active. If you delete your account, your personal data will be permanently removed from our servers within 30 days." data-ru="Мы храним ваши данные, пока ваш аккаунт активен. При удалении аккаунта ваши персональные данные будут безвозвратно удалены с наших серверов в течение 30 дней.">We retain your data for as long as your account is active. If you delete your account, your personal data will be permanently removed from our servers within 30 days.</p>
+
+            <h2 data-en="Your Rights" data-ru="Ваши права">Your Rights</h2>
+            <p data-en="You have the right to:" data-ru="Вы имеете право:">You have the right to:</p>
+            <ul>
+                <li data-en="Access the personal data we hold about you" data-ru="Получить доступ к персональным данным, которые мы храним о вас">Access the personal data we hold about you</li>
+                <li data-en="Request correction of inaccurate data" data-ru="Запросить исправление неточных данных">Request correction of inaccurate data</li>
+                <li data-en="Request deletion of your account and associated data" data-ru="Запросить удаление вашего аккаунта и связанных данных">Request deletion of your account and associated data</li>
+                <li data-en="Export your data" data-ru="Экспортировать ваши данные">Export your data</li>
+            </ul>
+            <p data-en="To exercise any of these rights, please contact us using the information below." data-ru="Для реализации любого из этих прав, пожалуйста, свяжитесь с нами, используя информацию ниже.">To exercise any of these rights, please contact us using the information below.</p>
+
+            <h2 data-en="Children's Privacy" data-ru="Конфиденциальность детей">Children's Privacy</h2>
+            <p data-en="Oxia is not intended for users under the age of 18. We do not knowingly collect personal information from children." data-ru="Oxia не предназначен для пользователей младше 18 лет. Мы сознательно не собираем персональную информацию от детей.">Oxia is not intended for users under the age of 18. We do not knowingly collect personal information from children.</p>
+
+            <h2 data-en="Changes to This Policy" data-ru="Изменения в этой политике">Changes to This Policy</h2>
+            <p data-en="We may update this Privacy Policy from time to time. We will notify you of any significant changes by posting the new policy in the app. Your continued use of the app after changes are posted constitutes acceptance of the updated policy." data-ru="Мы можем время от времени обновлять эту Политику конфиденциальности. Мы уведомим вас о любых существенных изменениях, опубликовав новую политику в приложении. Продолжение использования приложения после публикации изменений означает принятие обновлённой политики.">We may update this Privacy Policy from time to time. We will notify you of any significant changes by posting the new policy in the app. Your continued use of the app after changes are posted constitutes acceptance of the updated policy.</p>
+
+            <div class="contact-box">
+                <h2 data-en="Contact Us" data-ru="Связаться с нами">Contact Us</h2>
+                <p data-en="If you have any questions about this Privacy Policy or our data practices, please contact us at:" data-ru="Если у вас есть вопросы об этой Политике конфиденциальности или наших практиках работы с данными, пожалуйста, свяжитесь с нами:">If you have any questions about this Privacy Policy or our data practices, please contact us at:</p>
+                <p><strong>Email:</strong> support@oxia.app</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <img src="assets/logo.png" alt="Oxia Logo">
+                </div>
+                <span class="logo-text">Oxia</span>
+            </a>
+            <div class="footer-links">
+                <a href="privacy-policy.html" class="active" data-en="Privacy Policy" data-ru="Политика конфиденциальности">Privacy Policy</a>
+                <a href="terms-of-service.html" data-en="Terms of Service" data-ru="Условия использования">Terms of Service</a>
+                <a href="mailto:support@oxia.app" data-en="Support" data-ru="Поддержка">Support</a>
+            </div>
+            <p class="footer-copy">© 2026 Oxia. <span data-en="All rights reserved." data-ru="Все права защищены.">All rights reserved.</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        });
+
+        // Language switching
+        let currentLang = 'en';
+
+        function setLang(lang) {
+            currentLang = lang;
+
+            // Update buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent === lang.toUpperCase()) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Update all translatable elements
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (text) {
+                    el.textContent = text;
+                }
+            });
+        }
+    </script>
+</body>
+</html>

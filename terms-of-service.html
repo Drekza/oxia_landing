@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oxia - Terms of Service</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #32D74B;
+            --primary-green-light: #5EDB7B;
+            --primary-green-dark: #28A745;
+            --secondary-blue: #64D2FF;
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+            --gradient-green: linear-gradient(135deg, #32D74B 0%, #5EDB7B 50%, #64D2FF 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 10, 0.9);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            background: var(--gradient-green);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-cta {
+            padding: 0.75rem 1.75rem;
+            background: var(--gradient-green);
+            border: none;
+            border-radius: 50px;
+            color: #000;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(50, 215, 75, 0.3);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            background: var(--gradient-green);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .last-updated {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .content-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .intro-text {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        h2 {
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        li::marker {
+            color: var(--primary-green);
+        }
+
+        a {
+            color: var(--primary-green);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary-green-light);
+        }
+
+        .important {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid #f59e0b;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .important h2 {
+            color: #f59e0b;
+            margin-top: 0;
+        }
+
+        .important p {
+            margin-bottom: 0;
+        }
+
+        .contact-section {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+        }
+
+        .contact-section h2 {
+            margin-top: 0;
+            color: var(--primary-green);
+        }
+
+        .contact-section p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-copy {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .container {
+                padding: 6rem 1.5rem 2rem;
+            }
+
+            .content-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">
+            <div class="logo-icon">
+                <img src="assets/logo.png" alt="Oxia Logo">
+            </div>
+            <span class="logo-text">Oxia</span>
+        </a>
+        <a href="index.html#download" class="nav-cta">Download</a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Terms of Service</h1>
+            <p class="last-updated">Last updated: December 28, 2025</p>
+        </div>
+
+        <div class="content-card">
+            <p class="intro-text">Welcome to Oxia. By using our application, you agree to these Terms of Service. Please read them carefully.</p>
+
+            <h2>1. Acceptance of Terms</h2>
+            <p>By downloading, installing, or using Oxia, you agree to be bound by these Terms. If you do not agree to these Terms, do not use the app.</p>
+
+            <h2>2. Description of Service</h2>
+            <p>Oxia is a mobile application designed to support users in their journey to quit smoking. The app provides tools for tracking progress, managing cravings, and staying motivated.</p>
+
+            <div class="important">
+                <h2>3. Health Disclaimer</h2>
+                <p><strong>Oxia is not a medical device and does not provide medical advice.</strong> The app is intended for informational and motivational purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider with any questions about your health or before making any decisions related to your health or treatment. Quitting smoking may cause withdrawal symptoms; if you experience severe symptoms, seek medical attention. We do not guarantee any specific health outcomes from using this app.</p>
+            </div>
+
+            <h2>4. Eligibility</h2>
+            <p>You must be at least 18 years old to use Oxia. By using the app, you confirm that you meet this age requirement.</p>
+
+            <h2>5. Your Account</h2>
+            <p>You are responsible for maintaining the security of your account and for all activities that occur under your account. You agree to provide accurate information when creating your account.</p>
+
+            <h2>6. Acceptable Use</h2>
+            <p>You agree to use Oxia only for its intended purpose. You agree not to:</p>
+            <ul>
+                <li>Attempt to gain unauthorized access to the app or its systems</li>
+                <li>Use the app in any way that violates applicable laws</li>
+                <li>Reverse engineer, decompile, or disassemble the app</li>
+                <li>Interfere with or disrupt the app's functionality</li>
+            </ul>
+
+            <h2>7. Intellectual Property</h2>
+            <p>All content, features, and functionality of Oxia, including but not limited to text, graphics, logos, and software, are the property of Oxia and are protected by intellectual property laws.</p>
+
+            <h2>8. Limitation of Liability</h2>
+            <p>To the fullest extent permitted by law, Oxia and its developer shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the app. This includes, but is not limited to, any health outcomes, loss of data, or other intangible losses.</p>
+
+            <h2>9. Disclaimer of Warranties</h2>
+            <p>The app is provided "as is" and "as available" without warranties of any kind, either express or implied. We do not warrant that the app will be uninterrupted, error-free, or free of harmful components.</p>
+
+            <h2>10. Termination</h2>
+            <p>You may stop using Oxia at any time by deleting your account through the app. We reserve the right to suspend or terminate your access to the app if you violate these Terms.</p>
+
+            <h2>11. Changes to Terms</h2>
+            <p>We may update these Terms from time to time. We will notify you of significant changes by posting the updated Terms in the app. Your continued use of Oxia after changes are posted constitutes acceptance of the updated Terms.</p>
+
+            <h2>12. Governing Law</h2>
+            <p>These Terms shall be governed by and construed in accordance with applicable laws, without regard to conflict of law principles.</p>
+
+            <h2>13. Privacy</h2>
+            <p>Your use of Oxia is also governed by our <a href="privacy-policy.html">Privacy Policy</a>, which is incorporated into these Terms by reference.</p>
+
+            <div class="contact-section">
+                <h2>Contact Us</h2>
+                <p>If you have any questions about these Terms, please contact us at:</p>
+                <p><strong>Email:</strong> support@oxia.app</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <img src="assets/logo.png" alt="Oxia Logo">
+                </div>
+                <span class="logo-text">Oxia</span>
+            </a>
+            <div class="footer-links">
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-of-service.html">Terms of Service</a>
+                <a href="index.html#download">Download</a>
+            </div>
+            <p class="footer-copy">© 2026 Oxia. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
